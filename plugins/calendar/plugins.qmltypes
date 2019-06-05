@@ -11,7 +11,7 @@ Module {
     Component {
         name: "QQuickCalendar"
         prototype: "QObject"
-        exports: ["gosc.Qt.labs.calendar/Calendar 1.0"]
+        exports: ["gsoc.Qt.labs.calendar/Calendar 1.0"]
         isCreatable: false
         isSingleton: true
         exportMetaObjectRevisions: [0]
@@ -36,7 +36,7 @@ Module {
     Component {
         name: "QQuickCalendarModel"
         prototype: "QAbstractListModel"
-        exports: ["gosc.Qt.labs.calendar/CalendarModel 1.0"]
+        exports: ["gsoc.Qt.labs.calendar/CalendarModel 1.0"]
         exportMetaObjectRevisions: [0]
         Property { name: "from"; type: "QDate" }
         Property { name: "to"; type: "QDate" }
@@ -93,7 +93,7 @@ Module {
         name: "QQuickDayOfWeekRow"
         defaultProperty: "data"
         prototype: "QQuickControl"
-        exports: ["gosc.Qt.labs.calendar/AbstractDayOfWeekRow 1.0"]
+        exports: ["gsoc.Qt.labs.calendar/AbstractDayOfWeekRow 1.0"]
         exportMetaObjectRevisions: [0]
         Property { name: "source"; type: "QVariant" }
         Property { name: "delegate"; type: "QQmlComponent"; isPointer: true }
@@ -102,7 +102,7 @@ Module {
         name: "QQuickMonthGrid"
         defaultProperty: "data"
         prototype: "QQuickControl"
-        exports: ["gosc.Qt.labs.calendar/AbstractMonthGrid 1.0"]
+        exports: ["gsoc.Qt.labs.calendar/AbstractMonthGrid 1.0"]
         exportMetaObjectRevisions: [0]
         Property { name: "month"; type: "int" }
         Property { name: "year"; type: "int" }
@@ -130,7 +130,7 @@ Module {
         name: "QQuickWeekNumberColumn"
         defaultProperty: "data"
         prototype: "QQuickControl"
-        exports: ["gosc.Qt.labs.calendar/AbstractWeekNumberColumn 1.0"]
+        exports: ["gsoc.Qt.labs.calendar/AbstractWeekNumberColumn 1.0"]
         exportMetaObjectRevisions: [0]
         Property { name: "month"; type: "int" }
         Property { name: "year"; type: "int" }
