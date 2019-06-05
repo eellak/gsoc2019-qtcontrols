@@ -7,10 +7,11 @@ In QtCreator project build settings (Build & Run -> selected Qt kit -> Build), a
 
 ## Run entire UI
 
-After building the project, in QtCreator project run settings (Build & Run -> selected Qt kit -> Run), add a custom executable and select gosc_qqc2_calendar from:
+After building the project, in QtCreator project run settings (Build & Run -> selected Qt kit -> Run), add a custom executable and select gsoc_qqc2_calendar from:
 ```
 build_folder/bin/
 ```
+of the build directory.
 
 As a working directory, choose the project directory. 
 
