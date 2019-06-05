@@ -1,5 +1,5 @@
 TARGET = qtlabscalendarplugin
-TARGETPATH = gosc/Qt/labs/calendar
+TARGETPATH = gsoc/Qt/labs/calendar
 IMPORT_VERSION = 1.0
 
 QT += qml quick

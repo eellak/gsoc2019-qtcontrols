@@ -35,7 +35,7 @@
 ****************************************************************************/
 
 import QtQuick 2.12
-import gosc.Qt.labs.calendar 1.0
+import gsoc.Qt.labs.calendar 1.0
 
 AbstractMonthGrid {
     id: control

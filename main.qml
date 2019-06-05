@@ -2,13 +2,13 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.5
-import gosc.Qt.labs.calendar 1.0
+import gsoc.Qt.labs.calendar 1.0
 
 Window {
     visible: true
     width: 640
     height: 580
-    title: qsTr("GOSC 2019 - QtQuick.Controls 2 Calendar Project")
+    title: qsTr("GSOC 2019 - QtQuick.Controls 2 Calendar Project")
 
     ColumnLayout {
         anchors.centerIn: parent

@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = gosc_qqc2_calendar
+TARGET = gsoc_qqc2_calendar
 
 macos:CONFIG -= app_bundle
 

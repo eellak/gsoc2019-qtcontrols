@@ -1,4 +1,4 @@
-module gosc.Qt.labs.calendar
+module gsoc.Qt.labs.calendar
 plugin qtlabscalendarplugin
 classname QtLabsCalendarPlugin
 DayOfWeekRow 1.0 DayOfWeekRow.qml
