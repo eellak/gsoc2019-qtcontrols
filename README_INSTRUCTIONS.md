@@ -1,13 +1,13 @@
-## gosc_qqc2_calendar
+## gsoc_qqc2_calendar
 Initial fork of Qt.labs.calendar plugin as part of the GSoC project
 
 ## Build and install 
 
-In QtCreator project build settings, add another make step with 'install' as an argument
+In QtCreator project build settings (Build & Run -> selected Qt kit -> Build), add another make step with 'install' as an argument
 
 ## Run entire UI
 
-In QtCreator project run settings, add a custom executable and select gosc_qqc2_calendar from:
+After building the project, in QtCreator project run settings (Build & Run -> selected Qt kit -> Run), add a custom executable and select gosc_qqc2_calendar from:
 ```
 build_folder/bin/
 ```
