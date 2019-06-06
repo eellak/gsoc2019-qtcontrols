@@ -1,0 +1,7 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>assets/icons/next.png</file>
+    <file>assets/icons/previous.png</file>
+    <file>qtquickcontrols2.conf</file>
+</qresource>
+</RCC>
