@@ -3,5 +3,8 @@
     <file>assets/icons/next.png</file>
     <file>assets/icons/previous.png</file>
     <file>qtquickcontrols2.conf</file>
+    <file>plugins/calendar/DayOfWeekRow.qml</file>
+    <file>plugins/calendar/MonthGrid.qml</file>
+    <file>plugins/calendar/WeekNumberColumn.qml</file>
 </qresource>
 </RCC>
