@@ -192,6 +192,10 @@ void QtQuickControls2Plugin::registerTypes(const char *uri)
     qmlRegisterType(resolvedUrl(QStringLiteral("MenuBarItem.qml")), uri, 2, 3, "MenuBarItem");
     qmlRegisterUncreatableType<QQuickOverlay>(uri, 2, 3, "Overlay", QStringLiteral("Overlay is only available as an attached property."));
 
+    // QtQuick.Controls 2.13 (new types in Qt 5.13)
+    qmlRegisterType(resolvedUrl(QStringLiteral("Calendar.qml")), uri, 2, 3, "Calendar");
+
+
     // Register the latest version, even if there are no new types or new revisions for existing types yet.
     // Before Qt 5.12, we would do the following:
     //
