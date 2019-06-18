@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 import gsoc.Qt.labs.calendar 1.0 as GS
 import QtQuick.Templates 2.12 as T
+import "../calendar"
 
 GS.Calendar{
 
