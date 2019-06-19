@@ -1,12 +1,9 @@
-TEMPLATE = app
-TARGET = gsoc_qqc2_calendar
+TEMPLATE = subdirs
+SUBDIRS += \
+#    quicktemplates2 \
+#    quickcontrols2 \
+    imports \
+    ui
 
-macos:CONFIG -= app_bundle
-
-CONFIG += c++11
-QT += quick core
-
-SOURCES = main.cpp
-
-target.path = $$OUT_PWD/../bin
-INSTALLS += target
+#quickcontrols2.depends = quicktemplates2
+#imports.depends = quickcontrols2 quicktemplates2

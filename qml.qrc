@@ -1,10 +1,7 @@
-<!DOCTYPE RCC><RCC version="1.0">
-<qresource>
-    <file>assets/icons/next.png</file>
-    <file>assets/icons/previous.png</file>
-    <file>qtquickcontrols2.conf</file>
-    <file>imports/calendar/DayOfWeekRow.qml</file>
-    <file>imports/calendar/MonthGrid.qml</file>
-    <file>imports/calendar/WeekNumberColumn.qml</file>
-</qresource>
+<RCC>
+    <qresource prefix="/">
+        <file>assets/icons/next.png</file>
+        <file>assets/icons/previous.png</file>
+        <file>qtquickcontrols2.conf</file>
+    </qresource>
 </RCC>
