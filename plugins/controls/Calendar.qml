@@ -4,9 +4,8 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 import gsoc.Qt.labs.calendar 1.0 as GS
 import QtQuick.Templates 2.12 as T
-import "../calendar"
 
-GS.Calendar{
+gsoc.Qt.labs.calendar.Calendar{
 
     id: control
 
@@ -136,7 +135,6 @@ GS.Calendar{
 
     //Background of the calendar
 
-    // @disable-check M16
     background: Rectangle {
         implicitWidth: 600
         implicitHeight: 550
