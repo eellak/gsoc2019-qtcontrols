@@ -1,5 +1,5 @@
 TARGET = qtlabsplatformplugin
-TARGETPATH = Qt/labs/platform
+TARGETPATH = gsoc/Qt/labs/platform
 IMPORT_VERSION = 1.0
 
 QT += qml quick

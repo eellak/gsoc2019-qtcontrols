@@ -1,5 +1,5 @@
 TARGET = qtquicktemplates2plugin
-TARGETPATH = QtQuick/Templates.2
+TARGETPATH = gsoc/QtQuick/Templates.2
 IMPORT_VERSION = 2.4
 
 QT += qml quick

@@ -1,9 +1,9 @@
 TEMPLATE = subdirs
 SUBDIRS += \
-#    controls \
+    controls \
     calendar \
-#    platform \
-#    templates
+    platform \
+    templates
 
 SUBDIRS += \
 #    controls/fusion/fusion.pro \

@@ -1,5 +1,5 @@
 TARGET = qtquickcontrols2plugin
-TARGETPATH = QtQuick/Controls.2
+TARGETPATH = gsoc/QtQuick/Controls.2
 IMPORT_VERSION = 2.5
 
 QT += qml quick
