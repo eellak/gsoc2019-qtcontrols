@@ -1,4 +1,4 @@
-TARGET = QtQuickControls2
+TARGET = GsocQtQuickControls2
 MODULE = gsocquickcontrols2
 CMAKE_MODULE_TESTS=- #Fix project error
 
