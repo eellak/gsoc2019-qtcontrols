@@ -1,5 +1,5 @@
-TARGET = QtQuickTemplates2
-MODULE = quicktemplates2
+TARGET = GsocQtQuickTemplates2
+MODULE = gsocquicktemplates2
 CONFIG += internal_module
 
 QT += quick

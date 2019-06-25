@@ -1,5 +1,6 @@
 TARGET = QtQuickControls2
-MODULE = quickcontrols2
+MODULE = gsocquickcontrols2
+CMAKE_MODULE_TESTS=- #Fix project error
 
 QT += quick
 QT_PRIVATE += core-private gui-private qml-private quick-private quicktemplates2-private
