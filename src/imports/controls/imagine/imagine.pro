@@ -1,5 +1,5 @@
 TARGET = qtquickcontrols2imaginestyleplugin
-TARGETPATH = QtQuick/Controls.2/Imagine
+TARGETPATH = gsoc/QtQuick/Controls.2/Imagine
 IMPORT_VERSION = 2.5
 
 QT += qml quick

@@ -1,4 +1,4 @@
-module QtQuick.Controls.Imagine
+module gsoc.QtQuick.Controls.Imagine
 plugin qtquickcontrols2imaginestyleplugin
 classname QtQuickControls2ImagineStylePlugin
 depends QtQuick.Controls 2.5

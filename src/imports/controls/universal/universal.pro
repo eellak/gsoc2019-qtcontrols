@@ -1,5 +1,5 @@
 TARGET = qtquickcontrols2universalstyleplugin
-TARGETPATH = QtQuick/Controls.2/Universal
+TARGETPATH = gsoc/QtQuick/Controls.2/Universal
 IMPORT_VERSION = 2.5
 
 QT += qml quick
