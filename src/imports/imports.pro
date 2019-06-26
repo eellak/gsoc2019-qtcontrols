@@ -2,7 +2,7 @@ TEMPLATE = subdirs
 SUBDIRS += \
     controls \
     calendar \
-    platform \
+#    platform \
     templates
 
 SUBDIRS += \
