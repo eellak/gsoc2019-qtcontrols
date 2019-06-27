@@ -17,6 +17,7 @@ QML_FILES += \
 #    $$PWD/BusyIndicator.qml \
 #    $$PWD/Button.qml \
 #    $$PWD/ButtonPanel.qml \
+    $$PWD/Calendar.qml \
 #    $$PWD/CheckBox.qml \
 #    $$PWD/CheckDelegate.qml \
 #    $$PWD/CheckIndicator.qml \
