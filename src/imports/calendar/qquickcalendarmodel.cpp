@@ -246,6 +246,46 @@ QVariant QQuickCalendarModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
+void QQuickCalendarModel::selectPreviousDay()
+{
+
+}
+
+void QQuickCalendarModel::selectNextDay()
+{
+
+}
+
+void QQuickCalendarModel::selectPreviousWeek()
+{
+
+}
+
+void QQuickCalendarModel::selectNextWeek()
+{
+
+}
+
+void QQuickCalendarModel::keyPressEvent(QKeyEvent *event)
+{
+    Q_D(QQuickCalendarModel);
+    switch (event->key()) {
+    case Qt::Key_Left:
+        selectPreviousDay();
+    case Qt::Key_Down:
+        selectNextWeek();
+    case Qt::Key_Right:
+        selectNextDay();
+    case Qt::Key_Up:
+        selectPreviousWeek();
+
+    default:
+        event->ignore();
+//        QQuickControl::keyPressEvent(event);
+        break;
+    }
+}
+
 int QQuickCalendarModel::rowCount(const QModelIndex &parent) const
 {
     Q_D(const QQuickCalendarModel);

@@ -52,6 +52,7 @@
 #include <QtCore/qdatetime.h>
 #include <QtQml/qqmlparserstatus.h>
 #include <QtQml/qqml.h>
+#include <QKeyEvent>
 
 QT_BEGIN_NAMESPACE
 
@@ -79,6 +80,11 @@ public:
     Q_INVOKABLE int indexOf(const QDate &date) const;
     Q_INVOKABLE int indexOf(int year, int month) const;
 
+    Q_INVOKABLE void selectPreviousDay();
+    Q_INVOKABLE void selectNextDay();
+    Q_INVOKABLE void selectPreviousWeek();
+    Q_INVOKABLE void selectNextWeek();
+
     enum {
         MonthRole,
         YearRole
@@ -96,6 +102,7 @@ Q_SIGNALS:
 protected:
     void classBegin() override;
     void componentComplete() override;
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Q_DISABLE_COPY(QQuickCalendarModel)
