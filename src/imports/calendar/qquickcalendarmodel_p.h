@@ -98,6 +98,7 @@ Q_SIGNALS:
     void fromChanged();
     void toChanged();
     void countChanged();
+    void pressed();
 
 protected:
     void classBegin() override;
