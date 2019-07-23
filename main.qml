@@ -5,8 +5,7 @@ import QtQuick.Controls 2.5
 import gsoc.Qt.labs.calendar 1.0
 
 Window {
-    // @disable-check M16
-    gsoc.Qt.labs.calendar {
+    Calendar {
 
 
     }
