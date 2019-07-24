@@ -5,15 +5,15 @@ import QtQuick.Controls 2.5
 import gsoc.Qt.labs.calendar 1.0
 
 Window {
-    Calendar {
+//    Calendar {
 
 
-    }
+//    }
 
-//    visible: true
-//    width: 640
-//    height: 580
-//    title: qsTr("GSOC 2019 - QtQuick.Controls 2 Calendar Project")
+    visible: true
+    width: 640
+    height: 580
+    title: qsTr("GSOC 2019 - QtQuick.Controls 2 Calendar Project")
 
 //    ColumnLayout {
 //        anchors.centerIn: parent
