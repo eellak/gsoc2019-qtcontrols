@@ -3,7 +3,7 @@ import QtQuick.Window 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 import Qt.labs.calendar 1.0
-import gosc.QtQuick.Templates 2.12 as T
+import gsoc.QtQuick.Templates 2.12 as T
 
 T.Calendar{
 

@@ -13,8 +13,8 @@ Module {
         defaultProperty: "data"
         prototype: "QQuickItem"
         exports: [
-            "gosc.QtQuick.Templates/Control 2.0",
-            "gosc.QtQuick.Templates/Control 2.3"
+            "gsoc.QtQuick.Templates/Control 2.0",
+            "gsoc.QtQuick.Templates/Control 2.3"
         ]
         exportMetaObjectRevisions: [0, 3]
         Property { name: "font"; type: "QFont" }

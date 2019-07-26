@@ -4,10 +4,10 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Fusion 2.12
 import QtQuick.Controls.Fusion.impl 2.12
-import gosc.QtQuick.Templates 2.12 as T
+import gsoc.QtQuick.Templates 2.12 as T
 
 //FIXME
-import gosc.Qt.labs.calendar 1.0
+import gsoc.Qt.labs.calendar 1.0
 
 T.Calendar{
 
