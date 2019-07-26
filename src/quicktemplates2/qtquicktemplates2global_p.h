@@ -50,7 +50,7 @@
 
 #include <QtCore/qglobal.h>
 #include <QtQml/private/qqmlglobal_p.h>
-#include <QtQuickTemplates2/private/qtquicktemplates2-config_p.h>
+#include <qtquicktemplates2-config_p.h>
 
 QT_BEGIN_NAMESPACE
 

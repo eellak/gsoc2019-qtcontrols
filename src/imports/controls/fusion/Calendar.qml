@@ -4,11 +4,12 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Fusion 2.12
 import QtQuick.Controls.Fusion.impl 2.12
-import gsoc.Qt.labs.calendar 1.0 as GS
-import QtQuick.Templates 2.12 as T
-import "../../calendar"
+import gosc.QtQuick.Templates 2.12 as T
 
-GS.Calendar{
+//FIXME
+import gosc.Qt.labs.calendar 1.0
+
+T.Calendar{
 
     id: control
 
@@ -19,10 +20,7 @@ GS.Calendar{
 
     padding: 6
 
-    contentItem: Calendar {
-    // contentItem, maybe use later?
-
-    ColumnLayout {
+    contentItem: ColumnLayout {
         anchors.centerIn: parent
         spacing: 10
         RowLayout {
@@ -134,22 +132,19 @@ GS.Calendar{
                 }
             }
         }
-    }
 
-    //Background of the calendar
+        //Background of the calendar
 
-    // @disable-check M16
-    background: Rectangle {
-        implicitWidth: 600
-        implicitHeight: 550
+        // @disable-check M16
+        background: Rectangle {
+            implicitWidth: 600
+            implicitHeight: 550
 
-        color: control.down ? control.palette.mid : control.palette.button
-        border.color: control.palette.highlight
-        border.width: !control.editable && control.visualFocus ? 2 : 0
-        visible: !control.flat || control.down
-    }
-
-
+            color: control.down ? control.palette.mid : control.palette.button
+            border.color: control.palette.highlight
+            border.width: !control.editable && control.visualFocus ? 2 : 0
+            visible: !control.flat || control.down
+        }
     }
 }
 

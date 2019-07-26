@@ -99,6 +99,8 @@
 #include <QtQuickTemplates2/private/qquicktumbler_p.h>
 #endif
 
+#include <../../quicktemplates2/qquickcalendar_p.h>
+
 static inline void initResources()
 {
 #ifdef QT_STATIC
@@ -170,6 +172,8 @@ void QtQuickTemplates2Plugin::registerTypes(const char *uri)
     initProviders();
 
     qmlRegisterModule(uri, 2, QT_VERSION_MINOR - 7); // Qt 5.7->2.0, 5.8->2.1, 5.9->2.2...
+
+    qmlRegisterType<QQuickCalendar>(uri, 2, 0, "Calendar");
 
     // QtQuick.Templates 2.0 (originally introduced in Qt 5.7)
     qmlRegisterType<QQuickAbstractButton>(uri, 2, 0, "AbstractButton");

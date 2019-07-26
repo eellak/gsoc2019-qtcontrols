@@ -48,34 +48,29 @@
 // We mean it.
 //
 
-#include <QtCore/qobject.h>
-#include <QtCore/qdatetime.h>
-#include <QtQml/qqml.h>
+#include <qquickcontrol_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickCalendar : public QObject
+class QQuickCalendarPrivate;
+
+class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickCalendar : public QQuickControl
 {
     Q_OBJECT
+    Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged FINAL)
 
 public:
-    explicit QQuickCalendar(QObject *parent = nullptr);
+     explicit QQuickCalendar(QQuickItem *parent = nullptr);
 
-    enum Month {
-        January,
-        February,
-        March,
-        April,
-        May,
-        June,
-        July,
-        August,
-        September,
-        October,
-        November,
-        December
-    };
-    Q_ENUM(Month)
+    QString title() const;
+    void setTitle(const QString &title);
+
+Q_SIGNALS:
+    void titleChanged();
+
+private:
+    Q_DISABLE_COPY(QQuickCalendar)
+    Q_DECLARE_PRIVATE(QQuickCalendar)
 };
 
 QT_END_NAMESPACE

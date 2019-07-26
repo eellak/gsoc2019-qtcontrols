@@ -13,6 +13,14 @@ Module {
         "QtQuick.Window 2.2"
     ]
     Component {
+        name: "QQuickCalendar"
+        defaultProperty: "data"
+        exports: ["gosc.QtQuick.Templates/Calendar 2.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "title"; type: "string" }
+        //Property { name: ""; type: "" }
+    }
+    Component {
         name: "QQuickCheckLabel"
         defaultProperty: "data"
         prototype: "QQuickText"

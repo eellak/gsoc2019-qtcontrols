@@ -3,7 +3,7 @@
 ** Copyright (C) 2017 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
-** This file is part of the Qt Labs Calendar module of the Qt Toolkit.
+** This file is part of the Qt Quick Templates 2 module of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:LGPL3$
 ** Commercial License Usage
@@ -34,45 +34,60 @@
 **
 ****************************************************************************/
 
-#include "qquickcalendar_p.h"
-#include "qquickcontrol_p_p.h"
+#ifndef QQUICKDEFERREDEXECUTE_P_P_H
+#define QQUICKDEFERREDEXECUTE_P_P_H
 
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Qt API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
+
+#include <QtCore/qglobal.h>
+#include <qquickdeferredpointer_p_p.h>
+
+#include <QtQml/private/qqmlvme_p.h>
 
 QT_BEGIN_NAMESPACE
 
-/*!
-    \qmltype Calendar
-    \inherits Item
-    \instantiates QQuickCalendar
-    \inqmlmodule QtQuick.Controls
-    \since 5.13
-    \brief A Calendar base type providing basic common functionality.
+class QString;
+class QObject;
 
-    ...
-*/
-
-class QQuickCalendarPrivate : public QQuickControlPrivate
-{
-    Q_DECLARE_PUBLIC(QQuickCalendar)
-
-    public:
-        QString title;
-};
-
-QString QQuickCalendar::title() const
-{
-    Q_D(const QQuickCalendar);
-    return d->title;
+namespace QtQuickPrivate {
+    void beginDeferred(QObject *object, const QString &property);
+    void cancelDeferred(QObject *object, const QString &property);
+    void completeDeferred(QObject *object, const QString &property);
 }
 
-void QQuickCalendar::setTitle(const QString &title)
+template<typename T>
+void quickBeginDeferred(QObject *object, const QString &property, QQuickDeferredPointer<T> &delegate)
 {
-    Q_D(QQuickCalendar);
-    if (d->title != title) {
-        d->title = title;
-        emit titleChanged();
-    }
+    if (!QQmlVME::componentCompleteEnabled())
+           return;
+
+    delegate.setExecuting(true);
+    QtQuickPrivate::beginDeferred(object, property);
+    delegate.setExecuting(false);
 }
 
+inline void quickCancelDeferred(QObject *object, const QString &property)
+{
+    QtQuickPrivate::cancelDeferred(object, property);
+}
+
+template<typename T>
+void quickCompleteDeferred(QObject *object, const QString &property, QQuickDeferredPointer<T> &delegate)
+{
+    Q_ASSERT(!delegate.wasExecuted());
+    QtQuickPrivate::completeDeferred(object, property);
+    delegate.setExecuted();
+}
 
 QT_END_NAMESPACE
+
+#endif // QQUICKDEFERREDEXECUTE_P_P_H

@@ -128,6 +128,7 @@ void QtQuickControls2Plugin::registerTypes(const char *uri)
     qmlRegisterModule(uri, 2, QT_VERSION_MINOR);
 
     // QtQuick.Controls 2.0 (originally introduced in Qt 5.7)
+    qmlRegisterType(resolvedUrl(QStringLiteral("Calendar.qml")), uri, 2, 0, "Calendar");
     qmlRegisterType(resolvedUrl(QStringLiteral("AbstractButton.qml")), uri, 2, 0, "AbstractButton");
     qmlRegisterType(resolvedUrl(QStringLiteral("ApplicationWindow.qml")), uri, 2, 0, "ApplicationWindow");
     qmlRegisterType(resolvedUrl(QStringLiteral("BusyIndicator.qml")), uri, 2, 0, "BusyIndicator");
