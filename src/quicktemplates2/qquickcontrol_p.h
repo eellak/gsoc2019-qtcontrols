@@ -85,6 +85,7 @@ class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickControl : public QQuickItem
 
 public:
     explicit QQuickControl(QQuickItem *parent = nullptr);
+    virtual ~QQuickControl();
 
     QFont font() const;
     void setFont(const QFont &font);

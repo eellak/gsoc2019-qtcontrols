@@ -61,6 +61,7 @@ class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickCalendar : public QQuickControl
 
 public:
      explicit QQuickCalendar(QQuickItem *parent = nullptr);
+     virtual ~QQuickCalendar();
 
     QString title() const;
     void setTitle(const QString &title);
