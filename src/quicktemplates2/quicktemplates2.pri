@@ -1,13 +1,65 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
+    $$PWD/qquickabstractbutton_p.h \
+    $$PWD/qquickabstractbutton_p_p.h \
+    $$PWD/qquickaction_p.h \
+    $$PWD/qquickaction_p_p.h \
+    $$PWD/qquickapplicationwindow_p.h \
+    $$PWD/qquickbutton_p.h \
+    $$PWD/qquickbutton_p_p.h \
+    $$PWD/qquickbuttongroup_p.h \
     $$PWD/qquickcalendar_p.h \
+    $$PWD/qquickcontainer_p.h \
+    $$PWD/qquickcontainer_p_p.h \
     $$PWD/qquickcontrol_p.h \
     $$PWD/qquickcontrol_p_p.h \
     $$PWD/qquickdeferredexecute_p_p.h \
     $$PWD/qquickdeferredpointer_p_p.h \
+    $$PWD/qquickdialog_p.h \
+    $$PWD/qquickdialog_p_p.h \
+    $$PWD/qquickdialogbuttonbox_p.h \
+    $$PWD/qquickdialogbuttonbox_p_p.h \
+    $$PWD/qquickicon_p.h \
+    $$PWD/qquicklabel_p.h \
+    $$PWD/qquicklabel_p_p.h \
+    $$PWD/qquickpage_p.h \
+    $$PWD/qquickpage_p_p.h \
+    $$PWD/qquickpane_p.h \
+    $$PWD/qquickpane_p_p.h \
+    $$PWD/qquickpopup_p.h \
+    $$PWD/qquickpopup_p_p.h \
+    $$PWD/qquickpopupitem_p_p.h \
+    $$PWD/qquickpresshandler_p_p.h \
+    $$PWD/qquickshortcutcontext_p_p.h \
+    $$PWD/qquicktabbar_p.h \
+    $$PWD/qquicktextarea_p.h \
+    $$PWD/qquicktextarea_p_p.h \
+    $$PWD/qquicktextfield_p.h \
+    $$PWD/qquicktextfield_p_p.h \
+    $$PWD/qquicktoolbar_p.h \
 
 SOURCES += \
+    $$PWD/qquickabstractbutton.cpp \
+    $$PWD/qquickaction.cpp \
+    $$PWD/qquickapplicationwindow.cpp \
+    $$PWD/qquickbutton.cpp \
+    $$PWD/qquickbuttongroup.cpp \
     $$PWD/qquickcalendar.cpp \
+    $$PWD/qquickcontainer.cpp \
     $$PWD/qquickcontrol.cpp \
     $$PWD/qquickdeferredexecute.cpp \
+    $$PWD/qquickdialog.cpp \
+    $$PWD/qquickdialogbuttonbox.cpp \
+    $$PWD/qquickicon.cpp \
+    $$PWD/qquicklabel.cpp \
+    $$PWD/qquickpage.cpp \
+    $$PWD/qquickpane.cpp \
+    $$PWD/qquickpopup.cpp \
+    $$PWD/qquickpopupitem.cpp \
+    $$PWD/qquickpresshandler.cpp \
+    $$PWD/qquickshortcutcontext.cpp \
+    $$PWD/qquicktabbar.cpp \
+    $$PWD/qquicktextarea.cpp \
+    $$PWD/qquicktextfield.cpp \
+    $$PWD/qquicktoolbar.cpp \

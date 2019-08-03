@@ -39,15 +39,15 @@
 
 #include <QtGui/qstylehints.h>
 #include <QtGui/qguiapplication.h>
-//#include "qquicklabel_p.h"
-//#include "qquicklabel_p_p.h"
-//#include "qquicktextarea_p.h"
-//#include "qquicktextarea_p_p.h"
-//#include "qquicktextfield_p.h"
-//#include "qquicktextfield_p_p.h"
-//#include "qquickpopup_p.h"
-//#include "qquickpopupitem_p_p.h"
-//#include "qquickapplicationwindow_p.h"
+#include "qquicklabel_p.h"
+#include "qquicklabel_p_p.h"
+#include "qquicktextarea_p.h"
+#include "qquicktextarea_p_p.h"
+#include "qquicktextfield_p.h"
+#include "qquicktextfield_p_p.h"
+#include "qquickpopup_p.h"
+#include "qquickpopupitem_p_p.h"
+#include "qquickapplicationwindow_p.h"
 #include "qquickdeferredexecute_p_p.h"
 
 #include <QtGui/private/qguiapplication_p.h>
@@ -324,18 +324,18 @@ QFont QQuickControlPrivate::parentFont(const QQuickItem *item)
     while (p) {
         if (QQuickControl *control = qobject_cast<QQuickControl *>(p))
             return control->font();
-//        else if (QQuickLabel *label = qobject_cast<QQuickLabel *>(p))
-//            return label->font();
-//        else if (QQuickTextField *textField = qobject_cast<QQuickTextField *>(p))
-//            return textField->font();
-//        else if (QQuickTextArea *textArea = qobject_cast<QQuickTextArea *>(p))
-//            return textArea->font();
+        else if (QQuickLabel *label = qobject_cast<QQuickLabel *>(p))
+            return label->font();
+        else if (QQuickTextField *textField = qobject_cast<QQuickTextField *>(p))
+            return textField->font();
+        else if (QQuickTextArea *textArea = qobject_cast<QQuickTextArea *>(p))
+            return textArea->font();
 
         p = p->parentItem();
     }
 
-//    if (QQuickApplicationWindow *window = qobject_cast<QQuickApplicationWindow *>(item->window()))
-//        return window->font();
+    if (QQuickApplicationWindow *window = qobject_cast<QQuickApplicationWindow *>(item->window()))
+        return window->font();
 
     return themeFont(QPlatformTheme::SystemFont);
 }
@@ -406,12 +406,12 @@ void QQuickControlPrivate::updateFontRecur(QQuickItem *item, const QFont &font)
     for (QQuickItem *child : childItems) {
         if (QQuickControl *control = qobject_cast<QQuickControl *>(child))
             QQuickControlPrivate::get(control)->inheritFont(font);
-//        else if (QQuickLabel *label = qobject_cast<QQuickLabel *>(child))
-//            QQuickLabelPrivate::get(label)->inheritFont(font);
-//        else if (QQuickTextArea *textArea = qobject_cast<QQuickTextArea *>(child))
-//            QQuickTextAreaPrivate::get(textArea)->inheritFont(font);
-//        else if (QQuickTextField *textField = qobject_cast<QQuickTextField *>(child))
-//            QQuickTextFieldPrivate::get(textField)->inheritFont(font);
+        else if (QQuickLabel *label = qobject_cast<QQuickLabel *>(child))
+            QQuickLabelPrivate::get(label)->inheritFont(font);
+        else if (QQuickTextArea *textArea = qobject_cast<QQuickTextArea *>(child))
+            QQuickTextAreaPrivate::get(textArea)->inheritFont(font);
+        else if (QQuickTextField *textField = qobject_cast<QQuickTextField *>(child))
+            QQuickTextFieldPrivate::get(textField)->inheritFont(font);
         else
             QQuickControlPrivate::updateFontRecur(child, font);
     }
@@ -429,18 +429,18 @@ QPalette QQuickControlPrivate::parentPalette(const QQuickItem *item)
     while (p) {
         if (QQuickControl *control = qobject_cast<QQuickControl *>(p))
             return control->palette();
-//        else if (QQuickLabel *label = qobject_cast<QQuickLabel *>(p))
-//            return label->palette();
-//        else if (QQuickTextField *textField = qobject_cast<QQuickTextField *>(p))
-//            return textField->palette();
-//        else if (QQuickTextArea *textArea = qobject_cast<QQuickTextArea *>(p))
-//            return textArea->palette();
+        else if (QQuickLabel *label = qobject_cast<QQuickLabel *>(p))
+            return label->palette();
+        else if (QQuickTextField *textField = qobject_cast<QQuickTextField *>(p))
+            return textField->palette();
+        else if (QQuickTextArea *textArea = qobject_cast<QQuickTextArea *>(p))
+            return textArea->palette();
 
         p = p->parentItem();
     }
 
-//    if (QQuickApplicationWindow *window = qobject_cast<QQuickApplicationWindow *>(item->window()))
-//        return window->palette();
+    if (QQuickApplicationWindow *window = qobject_cast<QQuickApplicationWindow *>(item->window()))
+        return window->palette();
 
     return themePalette(QPlatformTheme::SystemPalette);
 }
@@ -511,12 +511,12 @@ void QQuickControlPrivate::updatePaletteRecur(QQuickItem *item, const QPalette &
     for (QQuickItem *child : childItems) {
         if (QQuickControl *control = qobject_cast<QQuickControl *>(child))
             QQuickControlPrivate::get(control)->inheritPalette(palette);
-//        else if (QQuickLabel *label = qobject_cast<QQuickLabel *>(child))
-//            QQuickLabelPrivate::get(label)->inheritPalette(palette);
-//        else if (QQuickTextArea *textArea = qobject_cast<QQuickTextArea *>(child))
-//            QQuickTextAreaPrivate::get(textArea)->inheritPalette(palette);
-//        else if (QQuickTextField *textField = qobject_cast<QQuickTextField *>(child))
-//            QQuickTextFieldPrivate::get(textField)->inheritPalette(palette);
+        else if (QQuickLabel *label = qobject_cast<QQuickLabel *>(child))
+            QQuickLabelPrivate::get(label)->inheritPalette(palette);
+        else if (QQuickTextArea *textArea = qobject_cast<QQuickTextArea *>(child))
+            QQuickTextAreaPrivate::get(textArea)->inheritPalette(palette);
+        else if (QQuickTextField *textField = qobject_cast<QQuickTextField *>(child))
+            QQuickTextFieldPrivate::get(textField)->inheritPalette(palette);
         else
             QQuickControlPrivate::updatePaletteRecur(child, palette);
     }
@@ -536,10 +536,10 @@ QLocale QQuickControlPrivate::calcLocale(const QQuickItem *item)
         p = p->parentItem();
     }
 
-//    if (item) {
-//        if (QQuickApplicationWindow *window = qobject_cast<QQuickApplicationWindow *>(item->window()))
-//            return window->locale();
-//    }
+    if (item) {
+        if (QQuickApplicationWindow *window = qobject_cast<QQuickApplicationWindow *>(item->window()))
+            return window->locale();
+    }
 
     return QLocale();
 }
@@ -608,8 +608,8 @@ bool QQuickControlPrivate::calcHoverEnabled(const QQuickItem *item)
         // QQuickPopupItem accepts hover events to avoid leaking them through.
         // Don't inherit that to the children of the popup, but fallback to the
         // environment variable or style hint.
-//        if (qobject_cast<const QQuickPopupItem *>(p))
-//            break;
+        if (qobject_cast<const QQuickPopupItem *>(p))
+            break;
 
         if (const QQuickControl *control = qobject_cast<const QQuickControl *>(p))
             return control->isHoverEnabled();
