@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTOOLBAR_P_H
-#define QQUICKTOOLBAR_P_H
+#ifndef QQUICKSCROLLVIEW_P_H
+#define QQUICKSCROLLVIEW_P_H
 
 //
 //  W A R N I N G
@@ -49,46 +49,39 @@
 //
 
 #include <qquickpane_p.h>
+#include <QtQml/qqmllist.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickToolBarPrivate;
+class QQuickScrollViewPrivate;
 
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickToolBar : public QQuickPane
+class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickScrollView : public QQuickPane
 {
     Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
 
 public:
-    explicit QQuickToolBar(QQuickItem *parent = nullptr);
-
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
-
-    Position position() const;
-    void setPosition(Position position);
-
-Q_SIGNALS:
-    void positionChanged();
+    explicit QQuickScrollView(QQuickItem *parent = nullptr);
 
 protected:
-    QFont defaultFont() const override;
-    QPalette defaultPalette() const override;
+    bool childMouseEventFilter(QQuickItem *item, QEvent *event) override;
+    bool eventFilter(QObject *object, QEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
+
+    void componentComplete() override;
+    void contentItemChange(QQuickItem *newItem, QQuickItem *oldItem) override;
+    void contentSizeChange(const QSizeF &newSize, const QSizeF &oldSize) override;
 
 #if QT_CONFIG(accessibility)
     QAccessible::Role accessibleRole() const override;
 #endif
 
 private:
-    Q_DISABLE_COPY(QQuickToolBar)
-    Q_DECLARE_PRIVATE(QQuickToolBar)
+    Q_DISABLE_COPY(QQuickScrollView)
+    Q_DECLARE_PRIVATE(QQuickScrollView)
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPE(QQuickToolBar)
+QML_DECLARE_TYPE(QQuickScrollView)
 
-#endif // QQUICKTOOLBAR_P_H
+#endif // QQUICKSCROLLVIEW_P_H

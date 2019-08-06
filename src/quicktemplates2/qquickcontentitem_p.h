@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2017 The Qt Company Ltd.
+** Copyright (C) 2018 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
 ** This file is part of the Qt Quick Templates 2 module of the Qt Toolkit.
@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTOOLBAR_P_H
-#define QQUICKTOOLBAR_P_H
+#ifndef QQUICKCONTENTITEM_P_H
+#define QQUICKCONTENTITEM_P_H
 
 //
 //  W A R N I N G
@@ -48,47 +48,23 @@
 // We mean it.
 //
 
-#include <qquickpane_p.h>
+#include <QtQuick/qquickitem.h>
+#include <qtquicktemplates2global_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickToolBarPrivate;
-
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickToolBar : public QQuickPane
+class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickContentItem : public QQuickItem
 {
     Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
 
 public:
-    explicit QQuickToolBar(QQuickItem *parent = nullptr);
-
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
-
-    Position position() const;
-    void setPosition(Position position);
-
-Q_SIGNALS:
-    void positionChanged();
-
-protected:
-    QFont defaultFont() const override;
-    QPalette defaultPalette() const override;
-
-#if QT_CONFIG(accessibility)
-    QAccessible::Role accessibleRole() const override;
-#endif
+    explicit QQuickContentItem(QQuickItem *parent = nullptr);
+    explicit QQuickContentItem(const QObject *scope, QQuickItem *parent);
 
 private:
-    Q_DISABLE_COPY(QQuickToolBar)
-    Q_DECLARE_PRIVATE(QQuickToolBar)
+    Q_DISABLE_COPY(QQuickContentItem)
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPE(QQuickToolBar)
-
-#endif // QQUICKTOOLBAR_P_H
+#endif // QQUICKCONTENTITEM_P_H

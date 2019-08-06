@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTOOLBAR_P_H
-#define QQUICKTOOLBAR_P_H
+#ifndef QQUICKTHEME_P_P_H
+#define QQUICKTHEME_P_P_H
 
 //
 //  W A R N I N G
@@ -48,47 +48,31 @@
 // We mean it.
 //
 
-#include <qquickpane_p.h>
+#include <qquicktheme_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickToolBarPrivate;
-
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickToolBar : public QQuickPane
+class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickThemePrivate
 {
-    Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
+    Q_DECLARE_PUBLIC(QQuickTheme)
 
 public:
-    explicit QQuickToolBar(QQuickItem *parent = nullptr);
+    static QQuickThemePrivate *get(QQuickTheme *theme)
+    {
+        return theme->d_func();
+    }
 
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
+    static QScopedPointer<QQuickTheme> instance;
 
-    Position position() const;
-    void setPosition(Position position);
+    static const int NScopes = QQuickTheme::Tumbler + 1;
 
-Q_SIGNALS:
-    void positionChanged();
-
-protected:
-    QFont defaultFont() const override;
-    QPalette defaultPalette() const override;
-
-#if QT_CONFIG(accessibility)
-    QAccessible::Role accessibleRole() const override;
-#endif
-
-private:
-    Q_DISABLE_COPY(QQuickToolBar)
-    Q_DECLARE_PRIVATE(QQuickToolBar)
+    QScopedPointer<const QFont> defaultFont;
+    QScopedPointer<const QPalette> defaultPalette;
+    QSharedPointer<QFont> fonts[NScopes];
+    QSharedPointer<QPalette> palettes[NScopes];
+    QQuickTheme *q_ptr = nullptr;
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPE(QQuickToolBar)
-
-#endif // QQUICKTOOLBAR_P_H
+#endif // QQUICKTHEME_P_P_H

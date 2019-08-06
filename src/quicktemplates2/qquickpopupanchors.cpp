@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2017 The Qt Company Ltd.
+** Copyright (C) 2018 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
 ** This file is part of the Qt Quick Templates 2 module of the Qt Toolkit.
@@ -34,61 +34,39 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTOOLBAR_P_H
-#define QQUICKTOOLBAR_P_H
-
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
-
-#include <qquickpane_p.h>
+#include "qquickpopupanchors_p.h"
+#include "qquickpopupanchors_p_p.h"
+#include "qquickpopup_p_p.h"
 
 QT_BEGIN_NAMESPACE
 
-class QQuickToolBarPrivate;
-
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickToolBar : public QQuickPane
+QQuickPopupAnchors::QQuickPopupAnchors(QQuickPopup *popup)
+    : QObject(*(new QQuickPopupAnchorsPrivate), popup)
 {
-    Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
+    Q_D(QQuickPopupAnchors);
+    d->popup = popup;
+}
 
-public:
-    explicit QQuickToolBar(QQuickItem *parent = nullptr);
+QQuickItem *QQuickPopupAnchors::centerIn() const
+{
+    Q_D(const QQuickPopupAnchors);
+    return d->centerIn;
+}
 
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
+void QQuickPopupAnchors::setCenterIn(QQuickItem *item)
+{
+    Q_D(QQuickPopupAnchors);
+    if (item == d->centerIn)
+        return;
 
-    Position position() const;
-    void setPosition(Position position);
+    d->centerIn = item;
+    QQuickPopupPrivate::get(d->popup)->reposition();
+    emit centerInChanged();
+}
 
-Q_SIGNALS:
-    void positionChanged();
-
-protected:
-    QFont defaultFont() const override;
-    QPalette defaultPalette() const override;
-
-#if QT_CONFIG(accessibility)
-    QAccessible::Role accessibleRole() const override;
-#endif
-
-private:
-    Q_DISABLE_COPY(QQuickToolBar)
-    Q_DECLARE_PRIVATE(QQuickToolBar)
-};
+void QQuickPopupAnchors::resetCenterIn()
+{
+    setCenterIn(nullptr);
+}
 
 QT_END_NAMESPACE
-
-QML_DECLARE_TYPE(QQuickToolBar)
-
-#endif // QQUICKTOOLBAR_P_H

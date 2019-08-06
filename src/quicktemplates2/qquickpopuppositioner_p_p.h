@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTOOLBAR_P_H
-#define QQUICKTOOLBAR_P_H
+#ifndef QQUICKPOPUPPOSITIONER_P_P_H
+#define QQUICKPOPUPPOSITIONER_P_P_H
 
 //
 //  W A R N I N G
@@ -48,47 +48,39 @@
 // We mean it.
 //
 
-#include <qquickpane_p.h>
+#include <QtQuick/private/qquickitemchangelistener_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickToolBarPrivate;
+class QQuickItem;
+class QQuickPopup;
 
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickToolBar : public QQuickPane
+class QQuickPopupPositioner : public QQuickItemChangeListener
 {
-    Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
-
 public:
-    explicit QQuickToolBar(QQuickItem *parent = nullptr);
+    explicit QQuickPopupPositioner(QQuickPopup *popup);
+    ~QQuickPopupPositioner();
 
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
+    QQuickPopup *popup() const;
 
-    Position position() const;
-    void setPosition(Position position);
+    QQuickItem *parentItem() const;
+    void setParentItem(QQuickItem *parent);
 
-Q_SIGNALS:
-    void positionChanged();
+    virtual void reposition();
 
 protected:
-    QFont defaultFont() const override;
-    QPalette defaultPalette() const override;
+    void itemGeometryChanged(QQuickItem *, QQuickGeometryChange, const QRectF &) override;
+    void itemParentChanged(QQuickItem *, QQuickItem *parent) override;
+    void itemChildRemoved(QQuickItem *, QQuickItem *child) override;
 
-#if QT_CONFIG(accessibility)
-    QAccessible::Role accessibleRole() const override;
-#endif
+    void removeAncestorListeners(QQuickItem *item);
+    void addAncestorListeners(QQuickItem *item);
 
-private:
-    Q_DISABLE_COPY(QQuickToolBar)
-    Q_DECLARE_PRIVATE(QQuickToolBar)
+    bool m_positioning = false;
+    QQuickItem *m_parentItem = nullptr;
+    QQuickPopup *m_popup = nullptr;
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPE(QQuickToolBar)
-
-#endif // QQUICKTOOLBAR_P_H
+#endif // QQUICKPOPUPPOSITIONER_P_P_H

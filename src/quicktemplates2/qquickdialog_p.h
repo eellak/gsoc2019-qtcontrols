@@ -48,7 +48,7 @@
 // We mean it.
 //
 
-#include <QtQuickTemplates2/private/qquickpopup_p.h>
+#include <qquickpopup_p.h>
 #include <QtGui/qpa/qplatformdialoghelper.h>
 
 QT_BEGIN_NAMESPACE

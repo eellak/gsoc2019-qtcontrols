@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTABBAR_P_H
-#define QQUICKTABBAR_P_H
+#ifndef QQUICKMENUBARITEM_P_H
+#define QQUICKMENUBARITEM_P_H
 
 //
 //  W A R N I N G
@@ -48,47 +48,40 @@
 // We mean it.
 //
 
-#include <qquickcontainer_p.h>
+#include <qquickabstractbutton_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickTabBarPrivate;
-class QQuickTabBarAttached;
-class QQuickTabBarAttachedPrivate;
+class QQuickMenu;
+class QQuickMenuBar;
+class QQuickMenuBarItemPrivate;
 
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickTabBar : public QQuickContainer
+class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickMenuBarItem : public QQuickAbstractButton
 {
     Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
-    // 2.2 (Qt 5.9)
-    Q_PROPERTY(qreal contentWidth READ contentWidth WRITE setContentWidth RESET resetContentWidth NOTIFY contentWidthChanged FINAL REVISION 2) // re-declare QQuickContainer::contentWidth (REV 5)
-    Q_PROPERTY(qreal contentHeight READ contentHeight WRITE setContentHeight RESET resetContentHeight NOTIFY contentHeightChanged FINAL REVISION 2) // re-declare QQuickContainer::contentHeight (REV 5)
+    Q_PROPERTY(QQuickMenuBar *menuBar READ menuBar NOTIFY menuBarChanged FINAL)
+    Q_PROPERTY(QQuickMenu *menu READ menu WRITE setMenu NOTIFY menuChanged FINAL)
+    Q_PROPERTY(bool highlighted READ isHighlighted WRITE setHighlighted NOTIFY highlightedChanged FINAL)
 
 public:
-    explicit QQuickTabBar(QQuickItem *parent = nullptr);
+    explicit QQuickMenuBarItem(QQuickItem *parent = nullptr);
 
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
+    QQuickMenuBar *menuBar() const;
 
-    Position position() const;
-    void setPosition(Position position);
+    QQuickMenu *menu() const;
+    void setMenu(QQuickMenu *menu);
 
-    static QQuickTabBarAttached *qmlAttachedProperties(QObject *object);
+    bool isHighlighted() const;
+    void setHighlighted(bool highlighted);
 
 Q_SIGNALS:
-    void positionChanged();
+    void triggered();
+    void menuBarChanged();
+    void menuChanged();
+    void highlightedChanged();
 
 protected:
-    void updatePolish() override;
-    void componentComplete() override;
     void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) override;
-    bool isContent(QQuickItem *item) const override;
-    void itemAdded(int index, QQuickItem *item) override;
-    void itemMoved(int index, QQuickItem *item) override;
-    void itemRemoved(int index, QQuickItem *item) override;
 
     QFont defaultFont() const override;
     QPalette defaultPalette() const override;
@@ -98,37 +91,12 @@ protected:
 #endif
 
 private:
-    Q_DISABLE_COPY(QQuickTabBar)
-    Q_DECLARE_PRIVATE(QQuickTabBar)
-};
-
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickTabBarAttached : public QObject
-{
-    Q_OBJECT
-    Q_PROPERTY(int index READ index NOTIFY indexChanged FINAL)
-    Q_PROPERTY(QQuickTabBar *tabBar READ tabBar NOTIFY tabBarChanged FINAL)
-    Q_PROPERTY(QQuickTabBar::Position position READ position NOTIFY positionChanged FINAL)
-
-public:
-    explicit QQuickTabBarAttached(QObject *parent = nullptr);
-
-    int index() const;
-    QQuickTabBar *tabBar() const;
-    QQuickTabBar::Position position() const;
-
-Q_SIGNALS:
-    void indexChanged();
-    void tabBarChanged();
-    void positionChanged();
-
-private:
-    Q_DISABLE_COPY(QQuickTabBarAttached)
-    Q_DECLARE_PRIVATE(QQuickTabBarAttached)
+    Q_DISABLE_COPY(QQuickMenuBarItem)
+    Q_DECLARE_PRIVATE(QQuickMenuBarItem)
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPE(QQuickTabBar)
-QML_DECLARE_TYPEINFO(QQuickTabBar, QML_HAS_ATTACHED_PROPERTIES)
+QML_DECLARE_TYPE(QQuickMenuBarItem)
 
-#endif // QQUICKTABBAR_P_H
+#endif // QQUICKMENUBARITEM_P_H

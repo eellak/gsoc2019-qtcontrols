@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2017 The Qt Company Ltd.
+** Copyright (C) 2018 The Qt Company Ltd.
 ** Contact: http://www.qt.io/licensing/
 **
 ** This file is part of the Qt Quick Templates 2 module of the Qt Toolkit.
@@ -34,61 +34,28 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTOOLBAR_P_H
-#define QQUICKTOOLBAR_P_H
+#include "qquickcontentitem_p.h"
 
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
-
-#include <qquickpane_p.h>
+#include <QtQml/private/qqmlmetatype_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickToolBarPrivate;
+/*!
+    \internal
 
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickToolBar : public QQuickPane
+    Helper class that aids debugging by producing more useful debugging output.
+*/
+
+QQuickContentItem::QQuickContentItem(QQuickItem *parent)
+    : QQuickItem(parent)
 {
-    Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
+    setObjectName(QQmlMetaType::prettyTypeName(parent));
+}
 
-public:
-    explicit QQuickToolBar(QQuickItem *parent = nullptr);
-
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
-
-    Position position() const;
-    void setPosition(Position position);
-
-Q_SIGNALS:
-    void positionChanged();
-
-protected:
-    QFont defaultFont() const override;
-    QPalette defaultPalette() const override;
-
-#if QT_CONFIG(accessibility)
-    QAccessible::Role accessibleRole() const override;
-#endif
-
-private:
-    Q_DISABLE_COPY(QQuickToolBar)
-    Q_DECLARE_PRIVATE(QQuickToolBar)
-};
+QQuickContentItem::QQuickContentItem(const QObject *scope, QQuickItem *parent)
+    : QQuickItem(parent)
+{
+    setObjectName(QQmlMetaType::prettyTypeName(scope));
+}
 
 QT_END_NAMESPACE
-
-QML_DECLARE_TYPE(QQuickToolBar)
-
-#endif // QQUICKTOOLBAR_P_H

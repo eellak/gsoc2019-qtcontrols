@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTOOLBAR_P_H
-#define QQUICKTOOLBAR_P_H
+#ifndef QQUICKTHEME_P_H
+#define QQUICKTHEME_P_H
 
 //
 //  W A R N I N G
@@ -48,47 +48,57 @@
 // We mean it.
 //
 
-#include <qquickpane_p.h>
+#include <qtquicktemplates2global_p.h>
+#include <QtCore/qscopedpointer.h>
+#include <QtGui/qfont.h>
+#include <QtGui/qpalette.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickToolBarPrivate;
+class QQuickThemePrivate;
 
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickToolBar : public QQuickPane
+class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickTheme
 {
-    Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
-
 public:
-    explicit QQuickToolBar(QQuickItem *parent = nullptr);
+    QQuickTheme();
+    ~QQuickTheme();
 
-    enum Position {
-        Header,
-        Footer
+    static QQuickTheme *instance();
+
+    enum Scope {
+        System,
+        Button,
+        CheckBox,
+        ComboBox,
+        GroupBox,
+        ItemView,
+        Label,
+        ListView,
+        Menu,
+        MenuBar,
+        RadioButton,
+        SpinBox,
+        Switch,
+        TabBar,
+        TextArea,
+        TextField,
+        ToolBar,
+        ToolTip,
+        Tumbler
     };
-    Q_ENUM(Position)
 
-    Position position() const;
-    void setPosition(Position position);
+    static QFont font(Scope scope);
+    static QPalette palette(Scope scope);
 
-Q_SIGNALS:
-    void positionChanged();
-
-protected:
-    QFont defaultFont() const override;
-    QPalette defaultPalette() const override;
-
-#if QT_CONFIG(accessibility)
-    QAccessible::Role accessibleRole() const override;
-#endif
+    void setFont(Scope scope, const QFont &font);
+    void setPalette(Scope scope, const QPalette &palette);
 
 private:
-    Q_DISABLE_COPY(QQuickToolBar)
-    Q_DECLARE_PRIVATE(QQuickToolBar)
+    Q_DISABLE_COPY(QQuickTheme)
+    Q_DECLARE_PRIVATE(QQuickTheme)
+    QScopedPointer<QQuickThemePrivate> d_ptr;
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPE(QQuickToolBar)
-
-#endif // QQUICKTOOLBAR_P_H
+#endif // QQUICKTHEME_P_H

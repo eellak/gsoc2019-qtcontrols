@@ -48,8 +48,8 @@
 // We mean it.
 //
 
-#include <QtQuickTemplates2/private/qquickdialog_p.h>
-#include <QtQuickTemplates2/private/qquickpopup_p_p.h>
+#include <qquickdialog_p.h>
+#include <qquickpopup_p_p.h>
 #include <QtGui/qpa/qplatformdialoghelper.h>
 
 QT_BEGIN_NAMESPACE

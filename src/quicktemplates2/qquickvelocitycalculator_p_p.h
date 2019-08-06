@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTOOLBAR_P_H
-#define QQUICKTOOLBAR_P_H
+#ifndef QQUICKVELOCITYCALCULATOR_P_P_H
+#define QQUICKVELOCITYCALCULATOR_P_P_H
 
 //
 //  W A R N I N G
@@ -48,47 +48,29 @@
 // We mean it.
 //
 
-#include <qquickpane_p.h>
+#include <QtCore/qpoint.h>
+#include <QtCore/qelapsedtimer.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickToolBarPrivate;
-
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickToolBar : public QQuickPane
+class QQuickVelocityCalculator
 {
-    Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
-
 public:
-    explicit QQuickToolBar(QQuickItem *parent = nullptr);
-
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
-
-    Position position() const;
-    void setPosition(Position position);
-
-Q_SIGNALS:
-    void positionChanged();
-
-protected:
-    QFont defaultFont() const override;
-    QPalette defaultPalette() const override;
-
-#if QT_CONFIG(accessibility)
-    QAccessible::Role accessibleRole() const override;
-#endif
+    void startMeasuring(const QPointF &point1, qint64 timestamp = 0);
+    void stopMeasuring(const QPointF &m_point2, qint64 timestamp = 0);
+    void reset();
+    QPointF velocity() const;
 
 private:
-    Q_DISABLE_COPY(QQuickToolBar)
-    Q_DECLARE_PRIVATE(QQuickToolBar)
+    QPointF m_point1;
+    QPointF m_point2;
+    qint64 m_point1Timestamp = 0;
+    qint64 m_point2Timestamp = 0;
+    // When a timestamp isn't available, we must use a timer.
+    // When stopMeasuring() has been called, we store the elapsed time in point2timestamp.
+    QElapsedTimer m_timer;
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPE(QQuickToolBar)
-
-#endif // QQUICKTOOLBAR_P_H
+#endif // QQUICKVELOCITYCALCULATOR_P_P_H

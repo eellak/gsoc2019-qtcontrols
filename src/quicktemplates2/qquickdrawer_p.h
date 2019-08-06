@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTOOLBAR_P_H
-#define QQUICKTOOLBAR_P_H
+#ifndef QQUICKDRAWER_P_H
+#define QQUICKDRAWER_P_H
 
 //
 //  W A R N I N G
@@ -48,47 +48,62 @@
 // We mean it.
 //
 
-#include <qquickpane_p.h>
+#include <qquickpopup_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickToolBarPrivate;
+class QQuickDrawerPrivate;
 
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickToolBar : public QQuickPane
+class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickDrawer : public QQuickPopup
 {
     Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
+    Q_PROPERTY(Qt::Edge edge READ edge WRITE setEdge NOTIFY edgeChanged FINAL)
+    Q_PROPERTY(qreal position READ position WRITE setPosition NOTIFY positionChanged FINAL)
+    Q_PROPERTY(qreal dragMargin READ dragMargin WRITE setDragMargin RESET resetDragMargin NOTIFY dragMarginChanged FINAL)
+    // 2.2 (Qt 5.9)
+    Q_PROPERTY(bool interactive READ isInteractive WRITE setInteractive NOTIFY interactiveChanged FINAL REVISION 2)
 
 public:
-    explicit QQuickToolBar(QQuickItem *parent = nullptr);
+    explicit QQuickDrawer(QObject *parent = nullptr);
 
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
+    Qt::Edge edge() const;
+    void setEdge(Qt::Edge edge);
 
-    Position position() const;
-    void setPosition(Position position);
+    qreal position() const;
+    void setPosition(qreal position);
+
+    qreal dragMargin() const;
+    void setDragMargin(qreal margin);
+    void resetDragMargin();
+
+    // 2.2 (Qt 5.9)
+    bool isInteractive() const;
+    void setInteractive(bool interactive);
 
 Q_SIGNALS:
+    void edgeChanged();
     void positionChanged();
+    void dragMarginChanged();
+    // 2.2 (Qt 5.9)
+    Q_REVISION(2) void interactiveChanged();
 
 protected:
-    QFont defaultFont() const override;
-    QPalette defaultPalette() const override;
-
-#if QT_CONFIG(accessibility)
-    QAccessible::Role accessibleRole() const override;
+    bool childMouseEventFilter(QQuickItem *child, QEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    bool overlayEvent(QQuickItem *item, QEvent *event) override;
+#if QT_CONFIG(quicktemplates2_multitouch)
+    void touchEvent(QTouchEvent *event) override;
 #endif
 
+    void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) override;
+
 private:
-    Q_DISABLE_COPY(QQuickToolBar)
-    Q_DECLARE_PRIVATE(QQuickToolBar)
+    Q_DISABLE_COPY(QQuickDrawer)
+    Q_DECLARE_PRIVATE(QQuickDrawer)
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPE(QQuickToolBar)
+QML_DECLARE_TYPE(QQuickDrawer)
 
-#endif // QQUICKTOOLBAR_P_H
+#endif // QQUICKDRAWER_P_H

@@ -34,61 +34,57 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTOOLBAR_P_H
-#define QQUICKTOOLBAR_P_H
+#include "qquicktabbutton_p.h"
+#include "qquickcontrol_p_p.h"
 
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
-
-#include <qquickpane_p.h>
+#include <QtGui/qpa/qplatformtheme.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickToolBarPrivate;
+/*!
+    \qmltype TabButton
+    \inherits AbstractButton
+    \instantiates QQuickTabButton
+    \inqmlmodule QtQuick.Controls
+    \since 5.7
+    \ingroup qtquickcontrols2-navigation
+    \brief Button with a look suitable for a TabBar.
 
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickToolBar : public QQuickPane
+    \image qtquickcontrols2-tabbutton.png
+
+    TabButton is used in conjunction with a \l TabBar.
+
+    \snippet qtquickcontrols2-tabbutton.qml 1
+
+    TabButton inherits its API from AbstractButton. For instance, you can set
+    \l {AbstractButton::text}{text}, and react to \l {AbstractButton::clicked}{clicks}
+    using the AbstractButton API.
+
+    \sa TabBar, {Customizing TabButton}, {Button Controls}, {Navigation Controls}
+*/
+
+QQuickTabButton::QQuickTabButton(QQuickItem *parent)
+    : QQuickAbstractButton(parent)
 {
-    Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
+    setCheckable(true);
+    setAutoExclusive(true);
+}
 
-public:
-    explicit QQuickToolBar(QQuickItem *parent = nullptr);
+QFont QQuickTabButton::defaultFont() const
+{
+    return QQuickTheme::font(QQuickTheme::TabBar);
+}
 
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
-
-    Position position() const;
-    void setPosition(Position position);
-
-Q_SIGNALS:
-    void positionChanged();
-
-protected:
-    QFont defaultFont() const override;
-    QPalette defaultPalette() const override;
+QPalette QQuickTabButton::defaultPalette() const
+{
+    return QQuickTheme::palette(QQuickTheme::TabBar);
+}
 
 #if QT_CONFIG(accessibility)
-    QAccessible::Role accessibleRole() const override;
+QAccessible::Role QQuickTabButton::accessibleRole() const
+{
+    return QAccessible::PageTab;
+}
 #endif
 
-private:
-    Q_DISABLE_COPY(QQuickToolBar)
-    Q_DECLARE_PRIVATE(QQuickToolBar)
-};
-
 QT_END_NAMESPACE
-
-QML_DECLARE_TYPE(QQuickToolBar)
-
-#endif // QQUICKTOOLBAR_P_H

@@ -34,61 +34,69 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTOOLBAR_P_H
-#define QQUICKTOOLBAR_P_H
+#include "qquickvelocitycalculator_p_p.h"
 
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
-
-#include <qquickpane_p.h>
+#include <QtCore/qdebug.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickToolBarPrivate;
+/*
+    Usage:
 
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickToolBar : public QQuickPane
+    QQuickVelocityCalculator velocityCalculator;
+
+    // ...
+
+    velocityCalcular.startMeasuring(event->pos(), event->timestamp());
+    velocityCalcular.stopMeasuring(event->pos(), event->timestamp());
+
+    // ...
+
+    if (velocityCalculator.velocity().x() > someAmount)
+        doSomething();
+    else if (velocityCalculator.velocity().x() < -someAmount)
+        doSomethingElse();
+*/
+
+void QQuickVelocityCalculator::startMeasuring(const QPointF &point1, qint64 timestamp)
 {
-    Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
+    m_point1 = point1;
 
-public:
-    explicit QQuickToolBar(QQuickItem *parent = nullptr);
+    if (timestamp != 0)
+        m_point1Timestamp = timestamp;
+    else
+        m_timer.start();
+}
 
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
+void QQuickVelocityCalculator::stopMeasuring(const QPointF &point2, qint64 timestamp)
+{
+    if (timestamp == 0 && !m_timer.isValid()) {
+        qWarning() << "QQuickVelocityCalculator: a call to stopMeasuring() must be preceded by a call to startMeasuring()";
+        return;
+    }
 
-    Position position() const;
-    void setPosition(Position position);
+    m_point2 = point2;
+    m_point2Timestamp = timestamp != 0 ? timestamp : m_timer.elapsed();
+    m_timer.invalidate();
+}
 
-Q_SIGNALS:
-    void positionChanged();
+void QQuickVelocityCalculator::reset()
+{
+    m_point1 = QPointF();
+    m_point2 = QPointF();
+    m_point1Timestamp = 0;
+    m_point2Timestamp = 0;
+    m_timer.invalidate();
+}
 
-protected:
-    QFont defaultFont() const override;
-    QPalette defaultPalette() const override;
+QPointF QQuickVelocityCalculator::velocity() const
+{
+    if ((m_point2Timestamp == 0 || m_point1Timestamp == m_point2Timestamp) && !m_timer.isValid())
+        return QPointF();
 
-#if QT_CONFIG(accessibility)
-    QAccessible::Role accessibleRole() const override;
-#endif
-
-private:
-    Q_DISABLE_COPY(QQuickToolBar)
-    Q_DECLARE_PRIVATE(QQuickToolBar)
-};
+    const qreal secondsElapsed = (m_point2Timestamp != 0 ? m_point2Timestamp - m_point1Timestamp : m_timer.elapsed()) / 1000.0;
+    const QPointF distance = m_point2 - m_point1;
+    return distance / secondsElapsed;
+}
 
 QT_END_NAMESPACE
-
-QML_DECLARE_TYPE(QQuickToolBar)
-
-#endif // QQUICKTOOLBAR_P_H

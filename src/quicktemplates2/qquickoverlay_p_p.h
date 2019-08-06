@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTOOLBAR_P_H
-#define QQUICKTOOLBAR_P_H
+#ifndef QQUICKOVERLAY_P_P_H
+#define QQUICKOVERLAY_P_P_H
 
 //
 //  W A R N I N G
@@ -48,47 +48,54 @@
 // We mean it.
 //
 
-#include <qquickpane_p.h>
+#include <qquickoverlay_p.h>
+
+#include <QtQuick/private/qquickitem_p.h>
+#include <QtQuick/private/qquickitemchangelistener_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickToolBarPrivate;
+class QQuickPopup;
+class QQuickDrawer;
 
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickToolBar : public QQuickPane
+class QQuickOverlayPrivate : public QQuickItemPrivate, public QQuickItemChangeListener
 {
-    Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
+    Q_DECLARE_PUBLIC(QQuickOverlay)
 
 public:
-    explicit QQuickToolBar(QQuickItem *parent = nullptr);
+    static QQuickOverlayPrivate *get(QQuickOverlay *overlay)
+    {
+        return overlay->d_func();
+    }
 
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
+    bool startDrag(QEvent *event, const QPointF &pos);
+    bool handlePress(QQuickItem *source, QEvent *event, QQuickPopup *target);
+    bool handleMove(QQuickItem *source, QEvent *event, QQuickPopup *target);
+    bool handleRelease(QQuickItem *source, QEvent *event, QQuickPopup *target);
 
-    Position position() const;
-    void setPosition(Position position);
-
-Q_SIGNALS:
-    void positionChanged();
-
-protected:
-    QFont defaultFont() const override;
-    QPalette defaultPalette() const override;
-
-#if QT_CONFIG(accessibility)
-    QAccessible::Role accessibleRole() const override;
+    bool handleMouseEvent(QQuickItem *source, QMouseEvent *event, QQuickPopup *target = nullptr);
+#if QT_CONFIG(quicktemplates2_multitouch)
+    bool handleTouchEvent(QQuickItem *source, QTouchEvent *event, QQuickPopup *target = nullptr);
 #endif
 
-private:
-    Q_DISABLE_COPY(QQuickToolBar)
-    Q_DECLARE_PRIVATE(QQuickToolBar)
+    void addPopup(QQuickPopup *popup);
+    void removePopup(QQuickPopup *popup);
+    void setMouseGrabberPopup(QQuickPopup *popup);
+
+    QVector<QQuickPopup *> stackingOrderPopups() const;
+    QVector<QQuickDrawer *> stackingOrderDrawers() const;
+
+    void itemGeometryChanged(QQuickItem *item, QQuickGeometryChange change, const QRectF &diff) override;
+
+    void updateGeometry();
+
+    QQmlComponent *modal = nullptr;
+    QQmlComponent *modeless = nullptr;
+    QVector<QQuickPopup *> allPopups;
+    QVector<QQuickDrawer *> allDrawers;
+    QPointer<QQuickPopup> mouseGrabberPopup;
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPE(QQuickToolBar)
-
-#endif // QQUICKTOOLBAR_P_H
+#endif // QQUICKOVERLAY_P_P_H

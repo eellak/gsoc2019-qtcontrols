@@ -5,6 +5,7 @@ HEADERS += \
     $$PWD/qquickabstractbutton_p_p.h \
     $$PWD/qquickaction_p.h \
     $$PWD/qquickaction_p_p.h \
+    $$PWD/qquickactiongroup_p.h \
     $$PWD/qquickapplicationwindow_p.h \
     $$PWD/qquickbutton_p.h \
     $$PWD/qquickbutton_p_p.h \
@@ -12,6 +13,7 @@ HEADERS += \
     $$PWD/qquickcalendar_p.h \
     $$PWD/qquickcontainer_p.h \
     $$PWD/qquickcontainer_p_p.h \
+    $$PWD/qquickcontentitem_p.h \
     $$PWD/qquickcontrol_p.h \
     $$PWD/qquickcontrol_p_p.h \
     $$PWD/qquickdeferredexecute_p_p.h \
@@ -20,46 +22,85 @@ HEADERS += \
     $$PWD/qquickdialog_p_p.h \
     $$PWD/qquickdialogbuttonbox_p.h \
     $$PWD/qquickdialogbuttonbox_p_p.h \
+    $$PWD/qquickdrawer_p.h \
+    $$PWD/qquickdrawer_p_p.h \
     $$PWD/qquickicon_p.h \
     $$PWD/qquicklabel_p.h \
     $$PWD/qquicklabel_p_p.h \
+    $$PWD/qquickmenu_p.h \
+    $$PWD/qquickmenu_p_p.h \
+    $$PWD/qquickmenubar_p.h \
+    $$PWD/qquickmenubar_p_p.h \
+    $$PWD/qquickmenubaritem_p.h \
+    $$PWD/qquickmenubaritem_p_p.h \
+    $$PWD/qquickmenuitem_p.h \
+    $$PWD/qquickmenuitem_p_p.h \
+    $$PWD/qquickoverlay_p.h \
+    $$PWD/qquickoverlay_p_p.h \
     $$PWD/qquickpage_p.h \
     $$PWD/qquickpage_p_p.h \
     $$PWD/qquickpane_p.h \
     $$PWD/qquickpane_p_p.h \
     $$PWD/qquickpopup_p.h \
     $$PWD/qquickpopup_p_p.h \
+    $$PWD/qquickpopupanchors_p.h \
+    $$PWD/qquickpopupanchors_p_p.h \
     $$PWD/qquickpopupitem_p_p.h \
+    $$PWD/qquickpopuppositioner_p_p.h \
     $$PWD/qquickpresshandler_p_p.h \
+    $$PWD/qquickscrollbar_p.h \
+    $$PWD/qquickscrollbar_p_p.h \
+    $$PWD/qquickscrollview_p.h \
     $$PWD/qquickshortcutcontext_p_p.h \
     $$PWD/qquicktabbar_p.h \
+    $$PWD/qquicktabbutton_p.h \
     $$PWD/qquicktextarea_p.h \
     $$PWD/qquicktextarea_p_p.h \
     $$PWD/qquicktextfield_p.h \
     $$PWD/qquicktextfield_p_p.h \
+    $$PWD/qquicktheme_p.h \
+    $$PWD/qquicktheme_p_p.h \
     $$PWD/qquicktoolbar_p.h \
+    $$PWD/qquicktooltip_p.h \
+    $$PWD/qquickvelocitycalculator_p_p.h
 
 SOURCES += \
     $$PWD/qquickabstractbutton.cpp \
     $$PWD/qquickaction.cpp \
+    $$PWD/qquickactiongroup.cpp \
     $$PWD/qquickapplicationwindow.cpp \
     $$PWD/qquickbutton.cpp \
     $$PWD/qquickbuttongroup.cpp \
     $$PWD/qquickcalendar.cpp \
     $$PWD/qquickcontainer.cpp \
+    $$PWD/qquickcontentitem.cpp \
     $$PWD/qquickcontrol.cpp \
     $$PWD/qquickdeferredexecute.cpp \
     $$PWD/qquickdialog.cpp \
     $$PWD/qquickdialogbuttonbox.cpp \
+    $$PWD/qquickdrawer.cpp \
     $$PWD/qquickicon.cpp \
     $$PWD/qquicklabel.cpp \
+    $$PWD/qquickmenu.cpp \
+    $$PWD/qquickmenubar.cpp \
+    $$PWD/qquickmenubaritem.cpp \
+    $$PWD/qquickmenuitem.cpp \
+    $$PWD/qquickoverlay.cpp \
     $$PWD/qquickpage.cpp \
     $$PWD/qquickpane.cpp \
     $$PWD/qquickpopup.cpp \
+    $$PWD/qquickpopupanchors.cpp \
     $$PWD/qquickpopupitem.cpp \
+    $$PWD/qquickpopuppositioner.cpp \
     $$PWD/qquickpresshandler.cpp \
+    $$PWD/qquickscrollbar.cpp \
+    $$PWD/qquickscrollview.cpp \
     $$PWD/qquickshortcutcontext.cpp \
     $$PWD/qquicktabbar.cpp \
+    $$PWD/qquicktabbutton.cpp \
     $$PWD/qquicktextarea.cpp \
     $$PWD/qquicktextfield.cpp \
+    $$PWD/qquicktheme.cpp \
     $$PWD/qquicktoolbar.cpp \
+    $$PWD/qquicktooltip.cpp \
+    $$PWD/qquickvelocitycalculator.cpp

@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTOOLBAR_P_H
-#define QQUICKTOOLBAR_P_H
+#ifndef QQUICKDRAWER_P_P_H
+#define QQUICKDRAWER_P_P_H
 
 //
 //  W A R N I N G
@@ -48,47 +48,54 @@
 // We mean it.
 //
 
-#include <qquickpane_p.h>
+#include <qquickdrawer_p.h>
+#include <qquickpopup_p_p.h>
+#include <qquickvelocitycalculator_p_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickToolBarPrivate;
-
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickToolBar : public QQuickPane
+class QQuickDrawerPrivate : public QQuickPopupPrivate
 {
-    Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
+    Q_DECLARE_PUBLIC(QQuickDrawer)
 
 public:
-    explicit QQuickToolBar(QQuickItem *parent = nullptr);
+    static QQuickDrawerPrivate *get(QQuickDrawer *drawer)
+    {
+        return drawer->d_func();
+    }
 
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
+    qreal offsetAt(const QPointF &point) const;
+    qreal positionAt(const QPointF &point) const;
 
-    Position position() const;
-    void setPosition(Position position);
+    QQuickPopupPositioner *getPositioner() override;
+    void showOverlay() override;
+    void hideOverlay() override;
+    void resizeOverlay() override;
 
-Q_SIGNALS:
-    void positionChanged();
-
-protected:
-    QFont defaultFont() const override;
-    QPalette defaultPalette() const override;
-
-#if QT_CONFIG(accessibility)
-    QAccessible::Role accessibleRole() const override;
+    bool startDrag(QEvent *event);
+    bool grabMouse(QQuickItem *item, QMouseEvent *event);
+#if QT_CONFIG(quicktemplates2_multitouch)
+    bool grabTouch(QQuickItem *item, QTouchEvent *event);
 #endif
+    bool blockInput(QQuickItem *item, const QPointF &point) const override;
 
-private:
-    Q_DISABLE_COPY(QQuickToolBar)
-    Q_DECLARE_PRIVATE(QQuickToolBar)
+    bool handlePress(QQuickItem* item, const QPointF &point, ulong timestamp) override;
+    bool handleMove(QQuickItem* item, const QPointF &point, ulong timestamp) override;
+    bool handleRelease(QQuickItem* item, const QPointF &point, ulong timestamp) override;
+    void handleUngrab() override;
+
+    bool prepareEnterTransition() override;
+    bool prepareExitTransition() override;
+
+    bool setEdge(Qt::Edge edge);
+
+    Qt::Edge edge = Qt::LeftEdge;
+    qreal offset = 0;
+    qreal position = 0;
+    qreal dragMargin = 0;
+    QQuickVelocityCalculator velocityCalculator;
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPE(QQuickToolBar)
-
-#endif // QQUICKTOOLBAR_P_H
+#endif // QQUICKDRAWER_P_P_H

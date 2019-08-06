@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTOOLBAR_P_H
-#define QQUICKTOOLBAR_P_H
+#ifndef QQUICKMENUBAR_P_P_H
+#define QQUICKMENUBAR_P_P_H
 
 //
 //  W A R N I N G
@@ -48,47 +48,60 @@
 // We mean it.
 //
 
-#include <qquickpane_p.h>
+#include <qquickmenubar_p.h>
+#include <qquickcontainer_p_p.h>
 
 QT_BEGIN_NAMESPACE
 
-class QQuickToolBarPrivate;
+class QQmlComponent;
+class QQuickMenuBarItem;
 
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickToolBar : public QQuickPane
+class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickMenuBarPrivate : public QQuickContainerPrivate
 {
-    Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
+    Q_DECLARE_PUBLIC(QQuickMenuBar)
 
 public:
-    explicit QQuickToolBar(QQuickItem *parent = nullptr);
+    static QQuickMenuBarPrivate *get(QQuickMenuBar *menuBar)
+    {
+        return menuBar->d_func();
+    }
 
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
+    QQmlListProperty<QQuickMenu> menus();
+    QQmlListProperty<QObject> contentData();
 
-    Position position() const;
-    void setPosition(Position position);
+    QQuickItem *beginCreateItem();
+    void completeCreateItem();
 
-Q_SIGNALS:
-    void positionChanged();
+    QQuickItem *createItem(QQuickMenu *menu);
 
-protected:
-    QFont defaultFont() const override;
-    QPalette defaultPalette() const override;
+    void toggleCurrentMenu(bool visible, bool activate);
+    void activateItem(QQuickMenuBarItem *item);
+    void activateNextItem();
+    void activatePreviousItem();
 
-#if QT_CONFIG(accessibility)
-    QAccessible::Role accessibleRole() const override;
-#endif
+    void onItemHovered();
+    void onItemTriggered();
+    void onMenuAboutToHide();
 
-private:
-    Q_DISABLE_COPY(QQuickToolBar)
-    Q_DECLARE_PRIVATE(QQuickToolBar)
+    qreal getContentWidth() const override;
+    qreal getContentHeight() const override;
+
+    void itemImplicitWidthChanged(QQuickItem *item) override;
+    void itemImplicitHeightChanged(QQuickItem *item) override;
+
+    static void contentData_append(QQmlListProperty<QObject> *prop, QObject *obj);
+
+    static void menus_append(QQmlListProperty<QQuickMenu> *prop, QQuickMenu *obj);
+    static int menus_count(QQmlListProperty<QQuickMenu> *prop);
+    static QQuickMenu *menus_at(QQmlListProperty<QQuickMenu> *prop, int index);
+    static void menus_clear(QQmlListProperty<QQuickMenu> *prop);
+
+    bool popupMode = false;
+    bool triggering = false;
+    QQmlComponent *delegate = nullptr;
+    QPointer<QQuickMenuBarItem> currentItem;
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPE(QQuickToolBar)
-
-#endif // QQUICKTOOLBAR_P_H
+#endif // QQUICKMENUBAR_P_P_H

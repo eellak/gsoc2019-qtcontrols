@@ -34,8 +34,8 @@
 **
 ****************************************************************************/
 
-#ifndef QQUICKTABBAR_P_H
-#define QQUICKTABBAR_P_H
+#ifndef QQUICKMENUBAR_P_H
+#define QQUICKMENUBAR_P_H
 
 //
 //  W A R N I N G
@@ -52,39 +52,40 @@
 
 QT_BEGIN_NAMESPACE
 
-class QQuickTabBarPrivate;
-class QQuickTabBarAttached;
-class QQuickTabBarAttachedPrivate;
+class QQuickMenu;
+class QQuickMenuBarPrivate;
 
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickTabBar : public QQuickContainer
+class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickMenuBar : public QQuickContainer
 {
     Q_OBJECT
-    Q_PROPERTY(Position position READ position WRITE setPosition NOTIFY positionChanged FINAL)
-    // 2.2 (Qt 5.9)
-    Q_PROPERTY(qreal contentWidth READ contentWidth WRITE setContentWidth RESET resetContentWidth NOTIFY contentWidthChanged FINAL REVISION 2) // re-declare QQuickContainer::contentWidth (REV 5)
-    Q_PROPERTY(qreal contentHeight READ contentHeight WRITE setContentHeight RESET resetContentHeight NOTIFY contentHeightChanged FINAL REVISION 2) // re-declare QQuickContainer::contentHeight (REV 5)
+    Q_PROPERTY(QQmlComponent *delegate READ delegate WRITE setDelegate NOTIFY delegateChanged FINAL)
+    Q_PROPERTY(qreal contentWidth READ contentWidth WRITE setContentWidth RESET resetContentWidth NOTIFY contentWidthChanged FINAL) // re-declare QQuickContainer::contentWidth (REV 5)
+    Q_PROPERTY(qreal contentHeight READ contentHeight WRITE setContentHeight RESET resetContentHeight NOTIFY contentHeightChanged FINAL) // re-declare QQuickContainer::contentHeight (REV 5)
+    Q_PRIVATE_PROPERTY(QQuickMenuBar::d_func(), QQmlListProperty<QQuickMenu> menus READ menus NOTIFY menusChanged FINAL)
+    Q_PRIVATE_PROPERTY(QQuickMenuBar::d_func(), QQmlListProperty<QObject> contentData READ contentData FINAL)
 
 public:
-    explicit QQuickTabBar(QQuickItem *parent = nullptr);
+    explicit QQuickMenuBar(QQuickItem *parent = nullptr);
 
-    enum Position {
-        Header,
-        Footer
-    };
-    Q_ENUM(Position)
+    QQmlComponent *delegate() const;
+    void setDelegate(QQmlComponent *delegate);
 
-    Position position() const;
-    void setPosition(Position position);
-
-    static QQuickTabBarAttached *qmlAttachedProperties(QObject *object);
+    Q_INVOKABLE QQuickMenu *menuAt(int index) const;
+    Q_INVOKABLE void addMenu(QQuickMenu *menu);
+    Q_INVOKABLE void insertMenu(int index, QQuickMenu *menu);
+    Q_INVOKABLE void removeMenu(QQuickMenu *menu);
+    Q_INVOKABLE QQuickMenu *takeMenu(int index);
 
 Q_SIGNALS:
-    void positionChanged();
+    void delegateChanged();
+    void menusChanged();
 
 protected:
-    void updatePolish() override;
-    void componentComplete() override;
-    void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) override;
+    bool eventFilter(QObject *object, QEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void hoverLeaveEvent(QHoverEvent *event) override;
+
     bool isContent(QQuickItem *item) const override;
     void itemAdded(int index, QQuickItem *item) override;
     void itemMoved(int index, QQuickItem *item) override;
@@ -98,37 +99,12 @@ protected:
 #endif
 
 private:
-    Q_DISABLE_COPY(QQuickTabBar)
-    Q_DECLARE_PRIVATE(QQuickTabBar)
-};
-
-class Q_QUICKTEMPLATES2_PRIVATE_EXPORT QQuickTabBarAttached : public QObject
-{
-    Q_OBJECT
-    Q_PROPERTY(int index READ index NOTIFY indexChanged FINAL)
-    Q_PROPERTY(QQuickTabBar *tabBar READ tabBar NOTIFY tabBarChanged FINAL)
-    Q_PROPERTY(QQuickTabBar::Position position READ position NOTIFY positionChanged FINAL)
-
-public:
-    explicit QQuickTabBarAttached(QObject *parent = nullptr);
-
-    int index() const;
-    QQuickTabBar *tabBar() const;
-    QQuickTabBar::Position position() const;
-
-Q_SIGNALS:
-    void indexChanged();
-    void tabBarChanged();
-    void positionChanged();
-
-private:
-    Q_DISABLE_COPY(QQuickTabBarAttached)
-    Q_DECLARE_PRIVATE(QQuickTabBarAttached)
+    Q_DISABLE_COPY(QQuickMenuBar)
+    Q_DECLARE_PRIVATE(QQuickMenuBar)
 };
 
 QT_END_NAMESPACE
 
-QML_DECLARE_TYPE(QQuickTabBar)
-QML_DECLARE_TYPEINFO(QQuickTabBar, QML_HAS_ATTACHED_PROPERTIES)
+QML_DECLARE_TYPE(QQuickMenuBar)
 
-#endif // QQUICKTABBAR_P_H
+#endif // QQUICKMENUBAR_P_H
