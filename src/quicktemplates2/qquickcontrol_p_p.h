@@ -215,6 +215,10 @@ public:
     };
     QLazilyAllocated<ExtraData> extra;
 
+    bool hasTopPadding = false;
+    bool hasLeftPadding = false;
+    bool hasRightPadding = false;
+    bool hasBottomPadding = false;
     bool hasHorizontalPadding = false;
     bool hasVerticalPadding = false;
     bool hasLocale = false;
@@ -226,6 +230,10 @@ public:
     bool resizingBackground = false;
     int touchId = -1;
     qreal padding = 0;
+    qreal topPadding = 0;
+    qreal leftPadding = 0;
+    qreal rightPadding = 0;
+    qreal bottomPadding = 0;
     qreal horizontalPadding = 0;
     qreal verticalPadding = 0;
     qreal implicitContentWidth = 0;

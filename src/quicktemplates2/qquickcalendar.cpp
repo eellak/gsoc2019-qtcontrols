@@ -74,5 +74,7 @@ void QQuickCalendar::setTitle(const QString &title)
     }
 }
 
+QQuickCalendar::~QQuickCalendar(){}
+
 
 QT_END_NAMESPACE

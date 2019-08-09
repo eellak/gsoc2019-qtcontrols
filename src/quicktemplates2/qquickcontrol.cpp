@@ -230,52 +230,56 @@ void QQuickControlPrivate::mirrorChange()
 void QQuickControlPrivate::setTopPadding(qreal value, bool reset)
 {
     Q_Q(QQuickControl);
-    const QMarginsF oldPadding = getPadding();
-    extra.value().topPadding = value;
-    extra.value().hasTopPadding = !reset;
-    if ((!reset && !qFuzzyCompare(oldPadding.top(), value)) || (reset && !qFuzzyCompare(oldPadding.top(), getVerticalPadding()))) {
+    qreal oldPadding = q->topPadding();
+    topPadding = value;
+    hasTopPadding = !reset;
+    if ((!reset && !qFuzzyCompare(oldPadding, value)) || (reset && !qFuzzyCompare(oldPadding, padding))) {
         emit q->topPaddingChanged();
         emit q->availableHeightChanged();
-        q->paddingChange(getPadding(), oldPadding);
+        q->paddingChange(QMarginsF(leftPadding, topPadding, rightPadding, bottomPadding),
+                         QMarginsF(leftPadding, oldPadding, rightPadding, bottomPadding));
     }
 }
 
 void QQuickControlPrivate::setLeftPadding(qreal value, bool reset)
 {
     Q_Q(QQuickControl);
-    const QMarginsF oldPadding = getPadding();
-    extra.value().leftPadding = value;
-    extra.value().hasLeftPadding = !reset;
-    if ((!reset && !qFuzzyCompare(oldPadding.left(), value)) || (reset && !qFuzzyCompare(oldPadding.left(), getHorizontalPadding()))) {
+    qreal oldPadding = q->leftPadding();
+    leftPadding = value;
+    hasLeftPadding = !reset;
+    if ((!reset && !qFuzzyCompare(oldPadding, value)) || (reset && !qFuzzyCompare(oldPadding, padding))) {
         emit q->leftPaddingChanged();
         emit q->availableWidthChanged();
-        q->paddingChange(getPadding(), oldPadding);
+        q->paddingChange(QMarginsF(leftPadding, topPadding, rightPadding, bottomPadding),
+                         QMarginsF(oldPadding, topPadding, rightPadding, bottomPadding));
     }
 }
 
 void QQuickControlPrivate::setRightPadding(qreal value, bool reset)
 {
     Q_Q(QQuickControl);
-    const QMarginsF oldPadding = getPadding();
-    extra.value().rightPadding = value;
-    extra.value().hasRightPadding = !reset;
-    if ((!reset && !qFuzzyCompare(oldPadding.right(), value)) || (reset && !qFuzzyCompare(oldPadding.right(), getHorizontalPadding()))) {
+    qreal oldPadding = q->rightPadding();
+    rightPadding = value;
+    hasRightPadding = !reset;
+    if ((!reset && !qFuzzyCompare(oldPadding, value)) || (reset && !qFuzzyCompare(oldPadding, padding))) {
         emit q->rightPaddingChanged();
         emit q->availableWidthChanged();
-        q->paddingChange(getPadding(), oldPadding);
+        q->paddingChange(QMarginsF(leftPadding, topPadding, rightPadding, bottomPadding),
+                         QMarginsF(leftPadding, topPadding, oldPadding, bottomPadding));
     }
 }
 
 void QQuickControlPrivate::setBottomPadding(qreal value, bool reset)
 {
     Q_Q(QQuickControl);
-    const QMarginsF oldPadding = getPadding();
-    extra.value().bottomPadding = value;
-    extra.value().hasBottomPadding = !reset;
-    if ((!reset && !qFuzzyCompare(oldPadding.bottom(), value)) || (reset && !qFuzzyCompare(oldPadding.bottom(), getVerticalPadding()))) {
+    qreal oldPadding = q->bottomPadding();
+    bottomPadding = value;
+    hasBottomPadding = !reset;
+    if ((!reset && !qFuzzyCompare(oldPadding, value)) || (reset && !qFuzzyCompare(oldPadding, padding))) {
         emit q->bottomPaddingChanged();
         emit q->availableHeightChanged();
-        q->paddingChange(getPadding(), oldPadding);
+        q->paddingChange(QMarginsF(leftPadding, topPadding, rightPadding, bottomPadding),
+                         QMarginsF(leftPadding, topPadding, rightPadding, oldPadding));
     }
 }
 
