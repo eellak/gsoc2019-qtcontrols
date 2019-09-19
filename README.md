@@ -29,3 +29,7 @@ The Qt Calendar widget is updated, modified accordingly and ported into Qt 5.12 
 ### Third phase (July 27 - August 26)
 
 * Submit the completed work upstream, so Qt maintainers can review it. Make the necessary changes based on feedback.
+
+## Build and install 
+
+In QtCreator project build settings (Build & Run -> selected Qt kit -> Build), add another make step with 'install' as an argument.
